@@ -109,7 +109,10 @@ docker-compose build
 # Step 7: Start the containers in detached mode
 docker-compose up -d
 
-# Step 8: Start the application
+# Step 8: Build the application
+npm run build
+
+# Step 9: Start the application
 npm run start
 ``` 
 
