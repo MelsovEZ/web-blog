@@ -1,5 +1,5 @@
 import Link from "next/link";
-import CardGrid from "./components/CardGrid";
+import CardGrid from "./components/PostGrid";
 import { fetchPosts } from "./lib/posts";
 
 export default async function Home() {

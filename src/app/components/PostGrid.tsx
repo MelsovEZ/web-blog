@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import { Post } from '@prisma/client';
-import Card from './Card';
+import Card from './PostCard';
 
 function CardGrid({ posts }: { posts: Post[] }) {
     const [searchTerm, setSearchTerm] = useState('');
@@ -32,6 +32,8 @@ function CardGrid({ posts }: { posts: Post[] }) {
                         thumbnail={post.thumbnail}
                         title={post.title}
                         content={post.content}
+                        id={post.id}
+                        likes={post.likes}
                     />
                 ))}
             </div>
