@@ -155,6 +155,6 @@ This component fetches and displays a full post based on its ID. It uses markdow
 
 ## P.S.
 
-The project was very simple, and this time I decided to focus on depth rather than breadth, eliminating all bugs and smoothing out the rough edges. I think I could have implemented authentication if I hadn't accidentally formatted my disk yesterday with the `sudo rm -rf` command, haha. I just wanted to clear out a folder, but I accidentally wrote the wrong symbol and deleted all the data from the disk, lmao. I could also deploy the app Vercel and Render, but unfortunately I don't have the time.
+The project was very simple, and this time I decided to focus on depth rather than breadth, eliminating all bugs and smoothing out the rough edges. I think I could have implemented authentication if I hadn't accidentally formatted my disk yesterday with the `sudo rm -rf` command, haha. I just wanted to clear out a folder, but I accidentally wrote the wrong symbol and deleted all the data from the disk. I could also deploy the app Vercel and Render, but unfortunately I don't have the time.
 
 <img src="https://github.com/MelsovEZ/web-blog/blob/master/public/hudson.gif" alt="There was a lot left in me..." height="400">
