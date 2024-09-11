@@ -86,25 +86,32 @@ I tried to put everything in a Dockerfile/docker-compose so that I could run it 
 # Step 1: Clone the repository
 git clone https://github.com/MelsovEZ/web-blog.git
 cd web-blog
+```
 
-# Step 2: Install dependencies
+```bash
+# Step 2: Set up the .env file
+# Make sure to create and configure the .env file in the root directory before proceeding.
+```
+
+```bash
+# Step 3: Install dependencies
 npm install
 
-# Step 3: Generate Prisma client
+# Step 4: Generate Prisma client
 npx prisma generate
 
-# Step 4: Deploy the Prisma migrations to your database
+# Step 5: Deploy the Prisma migrations to your database
 npx prisma migrate deploy
 
-# Step 5: Build the Docker containers
+# Step 6: Build the Docker containers
 docker-compose build
 
-# Step 6: Start the containers in detached mode
+# Step 7: Start the containers in detached mode
 docker-compose up -d
 
-# Step 7: Start the application
+# Step 8: Start the application
 npm run start
-```
+``` 
 
 Navigate to [http://localhost:3000](http://localhost:3000) in your browser to see the app in action. 
 
