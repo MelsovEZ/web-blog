@@ -1,9 +1,17 @@
-import PostDetails from '@/app/components/PostDetails';
+import PostClientComponent from './PostDetailsClientComponent';
+import { fetchPostData } from '@/app/lib/posts';
+import { Post } from '@prisma/client';
 
-export default function PostPage() {
+export default async function PostPage({ params }: { params: { id: string } }) {
+  const post: Post | null = await fetchPostData(params.id);
+
+  if (!post) {
+    return <p className="flex justify-center">No post found</p>;
+  }
+
   return (
-    <div>
-      <PostDetails />
+    <div className="max-w-2xl mx-auto p-4">
+      <PostClientComponent post={post} />
     </div>
   );
 }

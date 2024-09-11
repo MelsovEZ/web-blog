@@ -25,13 +25,13 @@ export async function POST(req: Request) {
     };
 
     const putCommand = new PutObjectCommand(params);
-    const signedUrl = await getSignedUrl(s3Client, putCommand, { expiresIn: 60 });
+    const signedUrl = await getSignedUrl(s3Client, putCommand, { expiresIn: 86400 });
 
     const getCommand = new GetObjectCommand({
       Bucket: process.env.S3_BUCKET_NAME!,
       Key: fileName,
     });
-    const fileUrl = await getSignedUrl(s3Client, getCommand, { expiresIn: 60 * 60 });
+    const fileUrl = await getSignedUrl(s3Client, getCommand, { expiresIn: 86400 });
 
     return NextResponse.json({
       signedRequest: signedUrl,

@@ -32,7 +32,7 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
     return NextResponse.json(post);
 }
 
-export async function DELETE({ params }: { params: { id: string } }) {
+export async function DELETE(req: Request, { params }: { params: { id: string } }) {
     const post = await prisma.post.delete({
         where: {
             id: parseInt(params.id),
