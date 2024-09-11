@@ -37,7 +37,7 @@ export async function POST(req: Request) {
       signedRequest: signedUrl,
       url: fileUrl,
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error generating signed URL:', error);
     return NextResponse.json({ error: 'Failed to generate signed URL' }, { status: 500 });
   }

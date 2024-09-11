@@ -20,8 +20,9 @@ export default function PostDetails() {
         } else {
           setError('Failed to load post');
         }
-      } catch (err) {
+      } catch (error: any) {
         setError('Something went wrong');
+        console.error(error.message);
       } finally {
         setLoading(false);
       }

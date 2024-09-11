@@ -3,13 +3,13 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export async function GET({ params }: { params: { id: string } }) {
+export async function GET(req: Request, { params }: { params: { id: string } }) {
     const post = await prisma.post.findUnique({
         where: {
             id: parseInt(params.id),
         },
     });
-    return post;
+    return NextResponse.json(post);
 }
 
 export async function PUT(req: Request, { params }: { params: { id: string } }) {
@@ -29,7 +29,7 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
             thumbnail,
         },
     });
-    return post;
+    return NextResponse.json(post);
 }
 
 export async function DELETE({ params }: { params: { id: string } }) {
@@ -38,5 +38,5 @@ export async function DELETE({ params }: { params: { id: string } }) {
             id: parseInt(params.id),
         },
     });
-    return post;
+    return NextResponse.json(post);
 }

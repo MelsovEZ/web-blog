@@ -110,7 +110,7 @@ function CreatePostForm() {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
-            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-zinc-500"
           />
         </div>
         <div>
@@ -119,7 +119,7 @@ function CreatePostForm() {
             value={content}
             onChange={(e) => setContent(e.target.value)}
             required
-            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-zinc-500"
           />
         </div>
         <div>
@@ -128,15 +128,15 @@ function CreatePostForm() {
             accept="image/*"
             onChange={handleFileChange}
             required
-            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-zinc-500"
           />
         </div>
         <button
           type="submit"
           disabled={isUploading}
           className={`w-full py-3 font-semibold text-white rounded-md transition ${
-            isUploading ? 'bg-gray-400' : 'bg-blue-600 hover:bg-blue-700'
-          } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+            isUploading ? 'bg-gray-400' : 'bg-zinc-600 hover:bg-zinc-700'
+          } focus:outline-none focus:ring-2 focus:ring-zinc-500`}
         >
           {isUploading ? 'Uploading...' : 'Create Post'}
         </button>
