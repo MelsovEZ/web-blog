@@ -22,7 +22,7 @@ function CardGrid({ posts }: { posts: Post[] }) {
                 placeholder="Search posts..."
                 value={searchTerm}
                 onChange={handleSearchChange}
-                className="mb-4 p-2 border border-gray-300 rounded"
+                className="mb-4 p-2 border border-zinc-500 rounded"
             />
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">

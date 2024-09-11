@@ -1,119 +1,135 @@
 'use client';
+
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-function CreatePostPage() {
+export default function CreatePost() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [file, setFile] = useState<File | null>(null);
-  const [thumbnailUrl, setThumbnailUrl] = useState('');
-  const [isUploading, setIsUploading] = useState(false);  // State to manage file upload process
-  const [errorMessage, setErrorMessage] = useState('');  // Error message state
+  const [thumbnail, setThumbnail] = useState<File | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const router = useRouter();
 
-  const handleFileUpload = async (): Promise<string | null> => {
-    if (!file) return null;
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+
+    if (!title || !content || !thumbnail) {
+      setError('All fields are required');
+      setLoading(false);
+      return;
+    }
 
     try {
-      setIsUploading(true);
-      const fileName = encodeURIComponent(file.name);
-      const fileType = file.type;
+      const formData = new FormData();
+      formData.append('title', title);
+      formData.append('content', content);
+      formData.append('thumbnail', thumbnail);
 
-      const res = await fetch('/api/upload', {
+      const res = await fetch('/api/posts', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ fileName, fileType }),
+        body: JSON.stringify({
+          title,
+          content,
+          thumbnail: {
+            fileName: thumbnail.name,
+            fileType: thumbnail.type,
+          },
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
 
-      if (!res.ok) {
-        throw new Error('Failed to get signed URL');
+      if (res.ok) {
+        const post = await res.json();
+        router.push(`/posts/${post.id}`);
+      } else {
+        const errorData = await res.json();
+        setError(errorData.error || 'Failed to create post');
       }
-
-      const { signedRequest, url } = await res.json();
-
-      const uploadRes = await fetch(signedRequest, {
-        method: 'PUT',
-        headers: { 'Content-Type': fileType },
-        body: file,
-      });
-
-      if (!uploadRes.ok) {
-        throw new Error('Failed to upload file to S3');
-      }
-
-      setThumbnailUrl(url);
-      setIsUploading(false);
-      return url;
-    } catch (error: any) {
-      setErrorMessage(error.message || 'Error during file upload');
-      setIsUploading(false);
-      return null;
+    } catch (err) {
+      setError('Something went wrong');
+    } finally {
+      setLoading(false);
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleThumbnailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files ? e.target.files[0] : null;
     
-    setErrorMessage('');
-
-    if (!file) {
-      setErrorMessage('Please select a file before submitting.');
-      return;
-    }
-
-    const uploadedThumbnailUrl = await handleFileUpload();
-
-    if (!uploadedThumbnailUrl) {
-      setErrorMessage('File upload failed. Please try again.');
-      return;
-    }
-
-    const res = await fetch('/api/posts', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        title,
-        content,
-        thumbnail: uploadedThumbnailUrl,
-      }),
-    });
-
-    if (res.ok) {
-      router.push('/');
-    } else {
-      setErrorMessage('Failed to create post. Please try again.');
+    if (file) {
+      const validTypes = ['image/jpeg', 'image/png', 'image/gif'];
+      
+      if (!validTypes.includes(file.type)) {
+        setError('Please upload a valid image (JPEG, PNG, or GIF)');
+        setThumbnail(null);
+        return;
+      }
+      
+      setThumbnail(file);
+      setError('');
     }
   };
 
   return (
-    <div>
-      <h1>Create a New Post</h1>
-      {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
-        <textarea
-          placeholder="Post content"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          required
-        />
-        <input
-          type="file"
-          onChange={(e) => setFile(e.target.files ? e.target.files[0] : null)}
-          required
-        />
-        <button type="submit" disabled={isUploading}>
-          {isUploading ? 'Uploading...' : 'Create Post'}
-        </button>
+    <div className="max-w-2xl mx-auto py-12">
+      <h1 className="text-2xl font-bold mb-6">Create a New Post</h1>
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div>
+          <label htmlFor="title" className="block text-sm font-medium text-gray-700">
+            Title
+          </label>
+          <input
+            type="text"
+            id="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+            className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-zinc-500 focus:border-zinc-500"
+          />
+        </div>
+        <div>
+          <label htmlFor="content" className="block text-sm font-medium text-gray-700">
+            Content
+          </label>
+          <textarea
+            id="content"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            required
+            rows={4}
+            className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-zinc-500 focus:border-zinc-500"
+          />
+        </div>
+        <div>
+          <label htmlFor="thumbnail" className="block text-sm font-medium text-gray-700">
+            Thumbnail Image
+          </label>
+          <input
+            type="file"
+            id="thumbnail"
+            onChange={handleThumbnailChange}
+            required
+            accept="image/*"
+            className="mt-1 block w-full text-sm text-gray-500 border border-gray-300 rounded-md shadow-sm"
+          />
+        </div>
+
+        {error && <p className="text-red-500">{error}</p>}
+
+        <div>
+          <button
+            type="submit"
+            disabled={loading}
+            className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-zinc-700 hover:bg-zinc-800 focus:outline-none"
+          >
+            {loading ? 'Creating...' : 'Create Post'}
+          </button>
+        </div>
       </form>
     </div>
   );
 }
-
-export default CreatePostPage;
