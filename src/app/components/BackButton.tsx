@@ -5,7 +5,7 @@ function BackButton() {
 
     return (
         <button
-            className="px-4 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 transition"
+            className="px-4 py-2 bg-gray-200 text-gray-700 font-semibold rounded hover:bg-gray-300 transition duration-300 ease-in-out"
             onClick={() => router.back()}
         >
             ← Go Back

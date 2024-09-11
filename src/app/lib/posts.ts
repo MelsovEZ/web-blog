@@ -10,8 +10,12 @@ export async function fetchPosts() {
             throw new Error('Failed to fetch posts');
         }
         return await response.json();
-    } catch (error: any) {
-        console.error("Error fetching posts:", error);
+    } catch (error) {
+        if (error instanceof Error) {
+            console.error(error.message);
+            return [];
+        }
+        console.error('An unexpected error occurred');
         return [];
     }
 }
@@ -22,8 +26,7 @@ export async function fetchPostData(id: string) {
 
     const res = await fetch(`http://${host}/api/posts/${id}`);
     if (!res.ok) {
-      throw new Error('Failed to fetch post data');
+        throw new Error('Failed to fetch post data');
     }
     return res.json();
-  }
-  
+}

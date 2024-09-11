@@ -7,7 +7,7 @@ import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import BackButton from '@/app/components/BackButton';
 
-export default function PostClientComponent({ post }: { post: Post }) {
+function Details({ post }: { post: Post }) {
   const [likes, setLikes] = useState(post.likes);
 
   const handleLike = async () => {
@@ -29,17 +29,15 @@ export default function PostClientComponent({ post }: { post: Post }) {
   };
 
   return (
-    <div>
+    <div className="bg-white shadow-lg rounded-lg p-6">
       <div className="flex justify-between mb-6">
         <BackButton />
-        <div className="flex">
-          <Link
-            href={`/edit/${post.id}`}
-            className="px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition w-auto"
-          >
-            Edit
-          </Link>
-        </div>
+        <Link
+          href={`/posts/edit/${post.id}`}
+          className="px-4 py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition duration-300 ease-in-out"
+        >
+          Edit
+        </Link>
       </div>
       {post.thumbnail && (
         <Image
@@ -47,22 +45,24 @@ export default function PostClientComponent({ post }: { post: Post }) {
           alt={post.title || 'Post Image'}
           width={800}
           height={450}
-          className="w-full h-80 object-cover rounded-md mb-4"
+          className="w-full h-80 object-cover rounded-md mb-6"
         />
       )}
-      <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
-      <div className="prose">
+      <h1 className="text-3xl font-bold text-gray-800 mb-4">{post.title}</h1>
+      <div className="prose max-w-none text-gray-700">
         <ReactMarkdown>{post.content}</ReactMarkdown>
       </div>
-      <div className="flex items-center mt-6">
+      <div className="flex items-center mt-8">
         <button
-          className="px-4 py-2 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
+          className="px-4 py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition duration-300 ease-in-out"
           onClick={handleLike}
         >
           👍 Like
         </button>
-        <span className="ml-4 text-xl">{likes} Likes</span>
+        <span className="ml-4 text-xl text-gray-600">{likes} Likes</span>
       </div>
     </div>
   );
 }
+
+export default Details;
