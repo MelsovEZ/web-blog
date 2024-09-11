@@ -8,7 +8,7 @@ export default async function Home() {
     <div>
       <h1 className="p-4 text-3xl font-bold">Latest Posts</h1>
       <Link href={'/create'} className="p-4">
-        <button className="bg-zinc-700 hover:bg-zinc-800 text-white font-bold py-2 px-4 rounded">
+        <button className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
           Create Post
         </button>
       </Link>

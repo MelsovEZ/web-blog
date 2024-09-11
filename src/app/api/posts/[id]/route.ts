@@ -13,7 +13,7 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
 }
 
 export async function PUT(req: Request, { params }: { params: { id: string } }) {
-    const { title, content, thumbnail } = await req.json();
+    const { title, content, thumbnail, likes } = await req.json();
 
     if (!title || !content || !thumbnail) {
         return NextResponse.json({ error: 'Missing fields' }, { status: 400 });
@@ -27,6 +27,7 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
             title,
             content,
             thumbnail,
+            likes
         },
     });
     return NextResponse.json(post);

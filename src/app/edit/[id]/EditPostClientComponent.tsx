@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import BackButton from '@/app/components/BackButton';
 
 export default function EditPostClientComponent({ post }: { post: { title: string, content: string, thumbnail: string, id: string } }) {
     const [title, setTitle] = useState(post.title);
@@ -111,14 +112,9 @@ export default function EditPostClientComponent({ post }: { post: { title: strin
 
     return (
         <div>
-            <button
-                className="mb-6 px-4 py-2 bg-zinc-600 text-white font-semibold rounded-lg shadow-md hover:bg-zinc-700 focus:outline-none focus:ring-2 focus:ring-zinc-500 transition"
-                onClick={() => router.back()}
-            >
-                ← Go Back
-            </button>
+            <BackButton />
             {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6 mt-6">
                 <div>
                     <input
                         type="text"

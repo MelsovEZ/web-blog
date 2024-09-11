@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import BackButton from '../components/BackButton';
 
 function CreatePostClientComponent() {
     const [title, setTitle] = useState('');
@@ -87,14 +88,9 @@ function CreatePostClientComponent() {
 
     return (
         <div>
-            <button
-                className="mb-6 px-4 py-2 bg-zinc-600 text-white font-semibold rounded-lg shadow-md hover:bg-zinc-700 focus:outline-none focus:ring-2 focus:ring-zinc-500 transition"
-                onClick={() => router.back()}
-            >
-                ← Go Back
-            </button>
+            <BackButton />
             {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6 mt-6">
                 <div>
                     <input
                         type="text"
@@ -126,7 +122,7 @@ function CreatePostClientComponent() {
                 <button
                     type="submit"
                     disabled={isUploading}
-                    className={`w-full py-3 font-semibold text-white rounded-md transition ${isUploading ? 'bg-gray-400' : 'bg-zinc-600 hover:bg-zinc-700'
+                    className={`w-full py-3 font-semibold text-white rounded-md transition ${isUploading ? 'bg-green-400' : 'bg-green-600 hover:bg-greens-700'
                         } focus:outline-none focus:ring-2 focus:ring-zinc-500`}
                 >
                     {isUploading ? 'Uploading...' : 'Create Post'}
