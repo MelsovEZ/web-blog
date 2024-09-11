@@ -1,5 +1,5 @@
 import EditForm from './EditForm';
-import { fetchPostData } from '@/app/lib/posts';
+import { fetchPostData } from '@/lib/posts';
 
 export default async function EditPostPage({ params }: { params: { id: string } }) {
   const post = await fetchPostData(params.id);

@@ -6,6 +6,7 @@ export async function fetchPosts() {
         const host = headersList.get('host');
 
         const response = await fetch(`http://${host}/api/posts`, { method: 'GET' });
+        console.log(response);
         if (!response.ok) {
             throw new Error('Failed to fetch posts');
         }

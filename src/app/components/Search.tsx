@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useSearch } from '@/app/context/SearchContext';
+import { useSearch } from '@/context/SearchContext';
 
 export default function Search() {
   const { searchTerm, setSearchTerm } = useSearch();

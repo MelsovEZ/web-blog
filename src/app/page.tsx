@@ -1,8 +1,8 @@
 import Link from "next/link";
-import CardGrid from "@/app/components/PostGrid";
-import Search from "@/app/components/Search";
-import { SearchProvider } from "@/app/context/SearchContext";
-import { fetchPosts } from "@/app/lib/posts";
+import CardGrid from "@/components/PostGrid";
+import Search from "@/components/Search";
+import { SearchProvider } from "@/context/SearchContext";
+import { fetchPosts } from "@/lib/posts";
 
 export default async function Home() {
   const posts = await fetchPosts();

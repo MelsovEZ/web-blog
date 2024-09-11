@@ -1,5 +1,5 @@
 import Details from './Details';
-import { fetchPostData } from '@/app/lib/posts';
+import { fetchPostData } from '@/lib/posts';
 import { Post } from '@prisma/client';
 
 export default async function PostDetailsPage({ params }: { params: { id: string } }) {

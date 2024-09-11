@@ -5,7 +5,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
-import BackButton from '@/app/components/BackButton';
+import BackButton from '@/components/BackButton';
 
 function Details({ post }: { post: Post }) {
   const [likes, setLikes] = useState(post.likes);

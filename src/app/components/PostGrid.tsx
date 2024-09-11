@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Post } from '@prisma/client';
 import Card from './PostCard';
-import { useSearch } from '@/app/context/SearchContext';
+import { useSearch } from '@/context/SearchContext';
 
 
 function PostGrid({ posts }: { posts: Post[] }) {

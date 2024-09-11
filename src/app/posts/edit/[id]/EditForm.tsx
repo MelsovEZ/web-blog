@@ -2,7 +2,7 @@
 
 import { useFormState, useFormStatus } from 'react-dom';
 import { useRouter } from 'next/navigation';
-import BackButton from '@/app/components/BackButton';
+import BackButton from '@/components/BackButton';
 import { useState } from 'react';
 
 type Post = {
