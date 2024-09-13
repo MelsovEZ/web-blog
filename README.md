@@ -97,17 +97,17 @@ cd web-blog
 # Step 3: Install dependencies
 npm install
 
-# Step 4: Generate Prisma client
-npx prisma generate
-
-# Step 5: Deploy the Prisma migrations to your database
-npx prisma migrate deploy
-
-# Step 6: Build the Docker containers
+# Step 4: Build the Docker containers
 docker-compose build
 
-# Step 7: Start the containers in detached mode
+# Step 5: Start the containers in detached mode
 docker-compose up -d
+
+# Step 6: Generate Prisma client
+npx prisma generate
+
+# Step 7: Deploy the Prisma migrations to your database
+npx prisma migrate deploy
 
 # Step 8: Build the application
 npm run build
